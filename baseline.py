@@ -14,7 +14,6 @@ from sklearn.metrics import mean_absolute_error
 import pickle
 
 def load_data(processed_file='data/processed_stats.csv'):
-    """Load processed game statistics."""
     df = pd.read_csv(processed_file)
     return df
 
@@ -123,8 +122,7 @@ def baseline_xgboost(df):
     return test_mae
 
 def run_all_baselines(processed_file='data/processed_stats.csv'):
-    """Run all baseline models."""
-    
+
     print("Loading data...")
     df = load_data(processed_file)
     print(f"Loaded {len(df)} batter-game records\n")
