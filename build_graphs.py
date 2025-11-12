@@ -10,7 +10,6 @@ import os
 from collections import defaultdict
 
 def compute_pitcher_stats(raw_df):
-    """Compute rolling stats for pitchers (similar to batters)."""
     print("Computing pitcher rolling stats...")
     
     # Compute per-game wOBA allowed for each pitcher
@@ -20,8 +19,6 @@ def compute_pitcher_stats(raw_df):
     }).reset_index()
     
     pitcher_stats['woba_allowed'] = pitcher_stats['woba_value'] / pitcher_stats['woba_denom'].replace(0, 1)
-    
-    # Sort by pitcher and date
     pitcher_stats = pitcher_stats.sort_values(['pitcher', 'game_date'])
     
     # Compute rolling average (10 game window)
@@ -40,7 +37,6 @@ def compute_pitcher_stats(raw_df):
     return pitcher_stats
 
 def compute_matchup_history(raw_df):
-    """Compute historical matchup stats between batters and pitchers."""
     print("Computing matchup history...")
     
     matchup_stats = defaultdict(lambda: {'pa': 0, 'woba_sum': 0, 'woba_denom': 0})
@@ -74,8 +70,7 @@ def compute_matchup_history(raw_df):
     return matchup_stats
 
 def build_game_graph(game_pk, game_stats, raw_df, pitcher_stats_df, matchup_stats):
-    """Build a single game graph with rich features."""
-    
+
     graph = HeteroData()
     
     # Get data for this game
@@ -85,7 +80,6 @@ def build_game_graph(game_pk, game_stats, raw_df, pitcher_stats_df, matchup_stat
     if len(game_batters) == 0 or len(game_raw) == 0:
         return None
     
-    # === NODE CONSTRUCTION ===
     
     # Batters with richer features
     batters = game_batters['batter'].unique().tolist()
@@ -136,7 +130,7 @@ def build_game_graph(game_pk, game_stats, raw_df, pitcher_stats_df, matchup_stat
     
     graph['pitcher'].x = torch.tensor(pitcher_features, dtype=torch.float)
     
-    # Teams (still simple for now)
+    # Simplified version of teams
     teams = [game_raw['home_team'].iloc[0], game_raw['away_team'].iloc[0]]
     team_to_idx = {t: i for i, t in enumerate(teams)}
     
