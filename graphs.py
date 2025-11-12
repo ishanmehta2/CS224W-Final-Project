@@ -1,5 +1,6 @@
 """
 Create training curves visualization from hardcoded data.
+There was an error in creating the graph from execute.py so this simply copies the results from that output run and builds a visualization for it. 
 """
 
 import matplotlib.pyplot as plt
