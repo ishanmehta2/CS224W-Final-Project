@@ -1,5 +1,5 @@
 """
-Improved training with tracking and visualization.
+Training script
 """
 
 import torch
@@ -59,7 +59,6 @@ def compute_metrics(y_true, y_pred, name="Model"):
 
 
 class ImprovedHeteroGraphSAGE(nn.Module):
-    """Improved heterogeneous GNN."""
     
     def __init__(self, batter_in=4, pitcher_in=2, team_in=2, 
                  hidden_channels=128, num_layers=3):
