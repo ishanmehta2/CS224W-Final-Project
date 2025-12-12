@@ -1,0 +1,30 @@
+
+\begin{table}[h]
+\centering
+\caption{Ablation Study Results (Test MAE, Temporal Split)}
+\label{tab:ablation}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Configuration} & \textbf{Test MAE} & \textbf{$\Delta$ vs Full} \\
+\midrule
+\multicolumn{3}{l}{\textit{Baselines}} \\
+Rolling Average (10-game) & 0.2377 & -- \\
+\midrule
+\multicolumn{3}{l}{\textit{Edge Type Ablation}} \\
+Full Model & 0.0693 & 0.0\% \\
+- Batter-Pitcher & 0.0689 & -0.5\% \\
+- Teammates & 0.0720 & +3.9\% \\
+- Batter-Team & 0.0637 & -8.1\% \\
+- Pitcher-Team & 0.0733 & +5.8\% \\
+Only Batter-Pitcher & 0.0656 & -5.3\% \\
+Only Teammates & 0.0640 & -7.6\% \\
+No Graph (MLP) & 0.0780 & +12.6\% \\
+
+\midrule
+\multicolumn{3}{l}{\textit{Architecture Comparison}} \\
+GraphSAGE & 0.0669 & -3.5\% \\
+GAT & 0.0653 & -5.8\% \\
+
+\bottomrule
+\end{tabular}
+\end{table}
